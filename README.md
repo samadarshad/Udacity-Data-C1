@@ -8,3 +8,6 @@ Initializing:
 5) createdb studentdb --encoding='utf-8'
    Run create_tables.py
 6) optional: psql sparkifydb -U student
+
+To stop:
+brew services stop postgresql

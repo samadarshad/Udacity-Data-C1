@@ -8,15 +8,17 @@ from sql_queries import *
 def process_song_file(cur, filepath):
     # open song file
     df = pd.read_json(filepath, lines=True)
-
-    # insert song record
     f = df.iloc[0]
-    song_data = [f.song_id, f.title, f.artist_id, int(f.year), f.duration]
-    cur.execute(song_table_insert, song_data)
-    
+
     # insert artist record
     artist_data = [f.artist_id, f.artist_name, f.artist_location, f.artist_latitude, f.artist_longitude]
     cur.execute(artist_table_insert, artist_data)
+
+    # insert song record
+    song_data = [f.song_id, f.title, f.artist_id, int(f.year), f.duration]
+    cur.execute(song_table_insert, song_data)
+    
+
 
 
 def process_log_file(cur, filepath):
@@ -30,7 +32,7 @@ def process_log_file(cur, filepath):
     t = pd.to_datetime(df.ts, unit='ms')
     
     # insert time data records
-    time_data = (t, t.dt.hour, t.dt.day, t.dt.weekofyear, t.dt.month, t.dt.year, t.dt.weekday)
+    time_data = (t, t.dt.hour, t.dt.day, t.dt.isocalendar().week, t.dt.month, t.dt.year, t.dt.weekday)
     column_labels = ('timestamp', 'hour', 'day', 'week', 'month', 'year', 'weekday')
     time_df = pd.DataFrame(dict(zip(column_labels, time_data)))
 

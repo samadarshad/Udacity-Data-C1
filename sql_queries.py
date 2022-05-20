@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS time (
     week INT CHECK (week >= 1 AND week <= 52),
     month INT CHECK (month >= 1 AND month <= 12),
     year INT,
-    weekday INT CHECK (weekday >= 1 AND weekday <= 7)
+    weekday INT CHECK (weekday >= 0 AND weekday <= 6)
     );
 """)
 

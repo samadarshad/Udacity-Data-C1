@@ -6,4 +6,5 @@ Initializing:
 4) initdb /usr/local/var/postgres
    createuser student --createdb 
 5) createdb studentdb --encoding='utf-8'
-6) optional: psql sparkify -U student
+   Run create_tables.py
+6) optional: psql sparkifydb -U student
